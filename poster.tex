@@ -82,16 +82,15 @@
 
         \begin{column}{\colwidth}
 
-            \begin{alertblock}{Abstract}
+            % \begin{alertblock}{Abstract}
 
-                Linear-in-means models are widely used to investigate peer effects. Identifying peer effects in these models is challenging, but conditions for identification are well-known. However, even when peer effects are identified, they may not be estimable, due to an asymptotic colinearity issue: as sample size increases, peer effects become more and more linearly dependent.  We show that asymptotic colinearity occurs whenever nodal covariates are independent of the network and the minimum degree of the network is growing. Asymptotic colinearity can cause estimators to be inconsistent or to converge at slower than expected rates. We also demonstrate that dependence between nodal covariates and network structure can alleviate colinearity issues in random dot product graphs. These results suggest that linear-in-means models are less reliable for studying peer influence than previously believed.
+            %     Linear-in-means models are widely used to investigate peer effects. Identifying peer effects in these models is challenging, but conditions for identification are well-known. However, even when peer effects are identified, they may not be estimable, due to an asymptotic colinearity issue: as sample size increases, peer effects become more and more linearly dependent.  We show that asymptotic colinearity occurs whenever nodal covariates are independent of the network and the minimum degree of the network is growing. Asymptotic colinearity can cause estimators to be inconsistent or to converge at slower than expected rates. We also demonstrate that dependence between nodal covariates and network structure can alleviate colinearity issues in random dot product graphs. These results suggest that linear-in-means models are less reliable for studying peer influence than previously believed.
 
-            \end{alertblock}
+            % \end{alertblock}
 
-            \begin{block}{The linear-in-means model}
+            \begin{block}{The linear-in-means model is a canonical tool to estimate peer influence in social networks}
 
-
-                The linear-in-means model is a canonical approach to estimating social influence in social networks. Suppose there is a network with $n$ nodes, encoded by a symmetric adjacency matrix $A \in \R^{n \times n}$. In binary networks, $A_{ij} = 1$ if nodes $i$ and $j$ form an edge, and $A_{ij} = 0$ otherwise, though we note that our results do not require that $A$ be binary. Each node $i$ is associated with an outcome $Y_i \in \R$ and a covariate $T_i \in \R$. Letting $\Ni = \left\{ j \in [n]: A_{ij} = 1 \right\}$ denote the neighbors of node $i$ in the network, the treatment and outcome of the neighbors are allowed to influence the outcome of node $i$ as follows:
+                % Suppose there is a network with $n$ nodes, encoded by a symmetric adjacency matrix $A \in \R^{n \times n}$. In binary networks, $A_{ij} = 1$ if nodes $i$ and $j$ form an edge, and $A_{ij} = 0$ otherwise, though we note that our results do not require that $A$ be binary. Each node $i$ is associated with an outcome $Y_i \in \R$ and a covariate $T_i \in \R$. Letting $\Ni = \left\{ j \in [n]: A_{ij} = 1 \right\}$ denote the neighbors of node $i$ in the network, the treatment and outcome of the neighbors are allowed to influence the outcome of node $i$ as follows:
                 \begin{equation}
                     \label{eq:lim-avg}
                     Y_i =
@@ -124,10 +123,10 @@
                     \end{tabular}
                 \end{table}
 
-                The coefficient $\beta$, typically called the ``contagion term'', measures how peer outcomes $Y_j$ influence the outcome $Y_i$ at vertex $i$.
-                This is variously referred to elsewhere in the literature as an ``exogeneous spatial lag'' \, a ``spatial autoregression'' or an ``endogeneous peer effect'' .
-                Similarly, the coefficient $\delta$, typically called the ``interference term'', measures how peer treatments $T_j$ influence $i$'s outcome $Y_i$.
-                Elsewhere in the literature, $\delta$ is variously referred to as a ``contextual peer effect'', an ``exogeneous peer effect'', a ``spatial Durbin term,'' or a ``spatially lagged X'' term.
+                % The coefficient $\beta$, typically called the ``contagion term'', measures how peer outcomes $Y_j$ influence the outcome $Y_i$ at vertex $i$.
+                % This is variously referred to elsewhere in the literature as an ``exogeneous spatial lag'' \, a ``spatial autoregression'' or an ``endogeneous peer effect'' .
+                % Similarly, the coefficient $\delta$, typically called the ``interference term'', measures how peer treatments $T_j$ influence $i$'s outcome $Y_i$.
+                % Elsewhere in the literature, $\delta$ is variously referred to as a ``contextual peer effect'', an ``exogeneous peer effect'', a ``spatial Durbin term,'' or a ``spatially lagged X'' term.
 
                 % The linear-in-means model has been the subject of considerable attention due to challenges identifying the peer effects \citep[see][for a recent review]{bramoulle2020}. \cite{manski1993} famously showed that peer effects are not identified in highly structured social networks. Much of the difficulty comes from the presence of $Y$ on both sides of of equation~\eqref{eq:lim-avg}.
                 % Manski's result was subsequently generalized by Proposition~\ref{prop:bramoulle2009} of \cite{bramoulle2009}, which showed that identification of the linear-in-means model is possible, provided that there are some open triangles (``intransivity'') or some variation in group sizes in the network. Since most social networks feature open triangles or variation in group sizes, the linear-in-means model is generally understood to be identified.
@@ -157,42 +156,25 @@
 
             \end{block}
 
-            \begin{block}{Identifying conditions}
+            \begin{block}{Linear-in-means model are famously suspectible to the ``reflection problem,'' an identification failure due to colinearity}
 
-                \begin{proposition}
-                    \label{prop:bramoulle2009}
-                    Fix $n$. Suppose $\mathbb E[\varepsilon \mid T] = 0$ and let
-                    \begin{equation*}
-                        Y = 1_n \alpha + G Y \beta + T \gamma + G T \delta + \varepsilon.
-                    \end{equation*}
-                    Suppose that $\abs{\beta} < 1$ and $\gamma \beta + \delta \neq 0$.
-                    If $I, G$ and $G^2$ are linearly independent in the sense that $a I + b G + c G^2 = 0$ only if $a = b = c = 0$, then $\alpha, \beta, \gamma$ and $\delta$ are identified.
-                    If $I, G$ and $G^2$ are linearly dependent and no node is isolated, then $(\alpha, \beta, \gamma, \delta)$ are not identified.
-                \end{proposition}
-
-                \begin{proposition} \label{prop:three-eig}
-                    If $G$ has three or more distinct eigenvalues, then $I, G$ and $G^2$ are linearly independent.
-                \end{proposition}
+                TODO
 
             \end{block}
 
+            \begin{block}{It's widely believed that colinearity problems can be avoided when certain identifying conditions, such as intransitivity, hold}
 
-            \begin{block}{Degeneracy in a well-identified model}
+                \textbf{Proposition:}
+                Fix $n$. Suppose $\mathbb E[\varepsilon \mid T] = 0$ and let
+                \begin{equation*}
+                    Y = 1_n \alpha + G Y \beta + T \gamma + G T \delta + \varepsilon.
+                \end{equation*}
+                Suppose that $\abs{\beta} < 1$ and $\gamma \beta + \delta \neq 0$.
+                If $I, G$ and $G^2$ are linearly independent in the sense that $a I + b G + c G^2 = 0$ only if $a = b = c = 0$, then $\alpha, \beta, \gamma$ and $\delta$ are identified.
+                If $I, G$ and $G^2$ are linearly dependent and no node is isolated, then $(\alpha, \beta, \gamma, \delta)$ are not identified.
 
-                \begin{figure}
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{./figures/simulations/biometrika-mse.pdf}
-                    \caption{Mean squared error of estimates. Each panel corresponds to a different estimator. Within a panel, the x-axis represents the sample size on a log scale, and the y-axis represents the Monte Carlo estimate of mean squared error, also on a log scale. Each line corresponds to a single coefficient; solid red lines are asymptotically colinear, dashed gray lines are not.}
-                    \label{fig:mse-problem}
-                \end{figure}
-            \end{block}
-        \end{column}
-
-        \separatorcolumn
-
-        \begin{column}{\colwidth}
-
-            \begin{block}{Explanation of the degeneracy}
+                \textbf{Proposition:}
+                If $G$ has three or more distinct eigenvalues, then $I, G$ and $G^2$ are linearly independent.
 
                 \begin{figure}
                     \begin{minipage}{0.49\textwidth}
@@ -232,94 +214,47 @@
                     \label{fig:averaging}
                 \end{figure}
             \end{block}
-
-            \begin{block}{Semi-parametric network model}
-
-
-                \begin{lemma} \label{lem:indepcov:nonid}
-                    Suppose that (1) the nodal covariates $T_1,T_2,\dots,T_n$ are independent with shared mean $\tau \in \R$, and $T$ is independent of $A$; (2) the centered nodal covariates $\{ T_i - \tau : i \in 1,2,\dots, n \}$, are independent $(\nu,b)$-subgamma random variables; (3) the regression errors $\varepsilon_1, \varepsilon_2, \dots, \varepsilon_n$ are independent subgamma random variables with parameters not depending on $n$, and further are independent of $T_1, ..., T_n$; and (4) the adjacency matrix $A$ contains only non-negative entries and does not contain any self-loops, such that $A_{ii} = 0$ for all $i = 1,2,\dots, n$.
-
-                    If the degrees of the network grow such that
-                    \begin{equation} \label{eq:growth:nub}
-                        \max_{i \in [n] } \frac{1}{d_i^2} \sum_{j=1}^n A_{ij}^2
-                        = o\left( \frac{ 1 }{ \nu \log^2 n } \right)
-                        ~\text{ and }
-                        \max_{i,j \in [n]} \frac{ A_{ij} }{ d_i }
-                        = o\left( \frac{ 1 }{ b \log n } \right).
-                    \end{equation}
-                    then
-                    \begin{equation*}
-                        \max_{i \in [n]} \Big\| [GT]_i - \tau \Big\|
-                        = o(1) ~ \text{ almost surely }
-                    \end{equation*}
-                    and
-                    \begin{equation*}
-                        \max_{i \in [n]} \Big\| [GY]_i - \eta \Big\|
-                        = o(1) ~ \text{ almost surely,}
-                    \end{equation*}
-                    where
-                    \begin{equation} \label{eq:def:eta}
-                        \eta = \frac{ \alpha + (\gamma+\delta)\tau }{ 1-\beta }.
-                    \end{equation}
-                \end{lemma}
-
-
-                \begin{theorem} \label{thm:indepcov:blowup}
-                    Let $(\alphahat, \betahat, \gammahat, \deltahat)$ be the vector of ordinary least squares estimates of $(\alpha, \beta, \gamma, \delta)$, based on an $n$-by-$n$ network, and suppose that as $n$ grows, the sequence of networks is such that
-                    \begin{equation} \label{eq:frobG:growthbound}
-                        \| G \|_F^2 = o( n ).
-                    \end{equation}
-                    Suppose that the adjacency matrix $A$ contains only non-negative entries and does not contain any self-loops, such that $A_{ii} = 0$ for all $i = 1, 2,\dots, n$; the nodal covariates $T_1,T_2,\dots,T_n$ are independent with shared mean $\tau \in \R$; the regression errors $\varepsilon_1, \varepsilon_2, \dots, \varepsilon_n$ and the centered nodal covariates $\{ T_i - \tau : i =1,2,\dots,n \}$ are independent sub-Gaussian random variables with parameters not depending on $n$; and the vectors $T$ and $\varepsilon$ are independent given $A$.
-                    Then if $\beta = 0$,
-                    \begin{equation*}
-                        \min\{ |\alphahat-\alpha|, |\betahat-\beta| \}
-                        = \Omegap{ 1 }
-                    \end{equation*}
-                    and
-                    \begin{equation} \label{eq:deltahat:LB}
-                        | \deltahat - \delta | = \Omegap{ \frac{1}{\|G\|_F} }.
-                    \end{equation}
-                    If $\beta \neq 0$,
-                    \begin{equation*}
-                        \min\{ |\alphahat-\alpha|, |\betahat-\beta| \}
-                        = \Omegap{ \frac{1}{\|G\|_F} }.
-                    \end{equation*}
-                    Finally, under the stronger growth assumption $\|G\|_F^2 = o( \sqrt{n} )$, equation~\eqref{eq:deltahat:LB} continues to hold for all values of $\beta$.
-                \end{theorem}
-
-                TODO
-            \end{block}
-
-            \begin{block}{Dependence between network and covariates can fix the degeneracy (partially)}
-
-                \begin{definition}[Random Dot Product Graph]
-                    \label{def:rdpg}
-                    Let $F$ be a distribution on $\R^d$ such that $0 \le x^T y$ for all $x,y \in \supp F$ and the convex cone of $\supp F$ is $d$-dimensional.
-                    Draw $X_1, X_2, \dots, X_n$ independently and identically from $F$, and collect these in the rows of $X \in \R^{n \times d}$ for ease of notation.
-                    Conditional on these $n$ vectors, which we call {\em latent positions}, generate edges by drawing $\{ A_{ij} : 1 \le i < j \le n \}$ as independent $(\nu,b)$-subgamma random variables with $\bbE[ A_{ij} \mid X ] = \rho X_i^T X_j$, where $\rho \in [0,1]$.
-                    Then we say that $A$ is distributed according to an $n$-vertex random dot product graph with latent position distribution $F$, $(\nu,b)$-subgamma edges and sparsity factor $\rho$.
-                    We write $(A,X) \sim \RDPG( F, n)$, with the subgamma and sparsity parameters made clear from the context.
-                \end{definition}
-
-                \begin{theorem} \label{thm:rdpg}
-                    Suppose that $(A, X)$ are sampled from a random dot product model where $X$ is rank $d$ with probability $1$.
-                    Let $\varepsilon$ be a vector of mean zero, i.i.d.~$(\nueps,\beps)$-subgamma random variables, with $(\nueps,\beps)$ not depending on $n$,
-                    and let
-                    \begin{equation*}
-                        Y = \alpha 1_n + \beta G Y + X \gamma + G X \delta + \varepsilon
-                    \end{equation*}
-                    for $\alpha, \beta \in \R$ and $\gamma, \delta \in \R^d$, and the conditions of Proposition~\ref{prop:bramoulle2009} hold. Suppose that $X$ has $k \ge 2d$ distinct rows. Then, under suitable technical conditions, the columns of design matrix corresponding to $(\alpha, \beta, \delta_1, \delta_2, \dots, \delta_d)$ are asymptotically colinear. If any two elements of $(\alpha, \beta, \delta_1, \delta_2, \dots, \delta_d)$ are equal to zero, there is no asymptotic colinearity.
-                \end{theorem}
-            \end{block}
-
-
         \end{column}
 
         \separatorcolumn
 
         \begin{column}{\colwidth}
+            \begin{block}{We show that peer effects can be inestimable even when identifying conditions hold}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{./figures/simulations/biometrika-mse.pdf}
+                    \caption{Mean squared error of estimates. Each panel corresponds to a different estimator. Within a panel, the x-axis represents the sample size on a log scale, and the y-axis represents the Monte Carlo estimate of mean squared error, also on a log scale. Each line corresponds to a single coefficient; solid red lines are asymptotically colinear, dashed gray lines are not.}
+                    \label{fig:mse-problem}
+                \end{figure}
+            \end{block}
 
-            \begin{exampleblock}{Theory}
+            \begin{block}{The problem is that peer effects can become asymptotic colinear even when they are linearly independent for every finite sample size}
+
+                \textbf{Intuition:} TODO COIN FLIP EXAMPLE
+
+                \textbf{Lemma:} Suppose that (1) the nodal covariates $T_1,T_2,\dots,T_n$ are independent with shared mean $\tau \in \R$, and $T$ is independent of $A$; (2) the centered nodal covariates $\{ T_i - \tau : i \in 1,2,\dots, n \}$, are independent $(\nu,b)$-subgamma random variables; (3) the regression errors $\varepsilon_1, \varepsilon_2, \dots, \varepsilon_n$ are independent subgamma random variables with parameters not depending on $n$, and further are independent of $T_1, ..., T_n$; and (4) the adjacency matrix $A$ contains only non-negative entries and does not contain any self-loops, such that $A_{ii} = 0$ for all $i = 1,2,\dots, n$.
+
+                If the degrees of the network grow such that
+                \begin{equation} \label{eq:growth:nub}
+                    \max_{i \in [n] } \frac{1}{d_i^2} \sum_{j=1}^n A_{ij}^2
+                    = o\left( \frac{ 1 }{ \nu \log^2 n } \right)
+                    ~\text{ and }
+                    \max_{i,j \in [n]} \frac{ A_{ij} }{ d_i }
+                    = o\left( \frac{ 1 }{ b \log n } \right).
+                \end{equation}
+                then
+                \begin{equation*}
+                    \max_{i \in [n]} \Big\| [GT]_i - \tau \Big\|
+                    = o(1) ~ \text{ almost surely }
+                \end{equation*}
+                and
+                \begin{equation*}
+                    \max_{i \in [n]} \Big\| [GY]_i - \frac{ \alpha + (\gamma+\delta)\tau }{ 1-\beta } \Big\|
+                    = o(1) ~ \text{ almost surely.}
+                \end{equation*}
+            \end{block}
+
+            \begin{block}{Simulations and theory show that asymptotic colinearity causes estimators to be inconsistent}
                 \begin{figure}
                     \centering
                     \includegraphics[width=0.8\textwidth]{./figures/simulations/biometrika-mse-all.pdf}
@@ -327,26 +262,66 @@
                     \label{fig:mse}
                 \end{figure}
 
-
                 \begin{figure}
                     \centering
                     \includegraphics[width=0.8\textwidth]{./figures/simulations/biometrika-vif.pdf}
                     \caption{Average variance inflation factors. Each panel denotes a different simulation setting. The x-axis represents the sample size on a log scale, and the y-axis represents the Monte Carlo estimate of mean variance inflation factor, also on log scale. Each line corresponds to a single coefficient. Solid red lines are asymptotically colinear, dashed gray lines are not.}
                     \label{fig:vif}
                 \end{figure}
-            \end{exampleblock}
+                \textbf{Theorem:} Let $(\alphahat, \betahat, \gammahat, \deltahat)$ be the vector of ordinary least squares estimates of $(\alpha, \beta, \gamma, \delta)$, based on an $n$-by-$n$ network, and suppose that as $n$ grows, the sequence of networks is such that
+                \begin{equation} \label{eq:frobG:growthbound}
+                    \| G \|_F^2 = o( n ).
+                \end{equation}
+                Suppose that the adjacency matrix $A$ contains only non-negative entries and does not contain any self-loops, such that $A_{ii} = 0$ for all $i = 1, 2,\dots, n$; the nodal covariates $T_1,T_2,\dots,T_n$ are independent with shared mean $\tau \in \R$; the regression errors $\varepsilon_1, \varepsilon_2, \dots, \varepsilon_n$ and the centered nodal covariates $\{ T_i - \tau : i =1,2,\dots,n \}$ are independent sub-Gaussian random variables with parameters not depending on $n$; and the vectors $T$ and $\varepsilon$ are independent given $A$.
+                Then if $\beta = 0$,
+                \begin{equation*}
+                    \min\{ |\alphahat-\alpha|, |\betahat-\beta| \}
+                    = \Omegap{ 1 }
+                \end{equation*}
+                and
+                \begin{equation} \label{eq:deltahat:LB}
+                    | \deltahat - \delta | = \Omegap{ \frac{1}{\|G\|_F} }.
+                \end{equation}
+                If $\beta \neq 0$,
+                \begin{equation*}
+                    \min\{ |\alphahat-\alpha|, |\betahat-\beta| \}
+                    = \Omegap{ \frac{1}{\|G\|_F} }.
+                \end{equation*}
+                Finally, under the stronger growth assumption $\|G\|_F^2 = o( \sqrt{n} )$, equation~\eqref{eq:deltahat:LB} continues to hold for all values of $\beta$.
+            \end{block}
+        \end{column}
 
-            \begin{alertblock}{Takeaways}
+        \separatorcolumn
+
+        \begin{column}{\colwidth}
+            \begin{block}{When nodal covariates are strongly associated with network structure, it is sometimes possible to avoid asymptotic colinearity}
+
+                \textbf{Intuition:} avoid might not converge if $T$ and $A$ depend on one another
+
+                \textbf{Random dot product graphs:} Let $F$ be a distribution on $\R^d$ such that $0 \le x^T y$ for all $x,y \in \supp F$ and the convex cone of $\supp F$ is $d$-dimensional. Draw $X_1, X_2, \dots, X_n$ independently and identically from $F$, and collect these in the rows of $X \in \R^{n \times d}$ for ease of notation. Conditional on these $n$ vectors, which we call {\em latent positions}, generate edges by drawing $\{ A_{ij} : 1 \le i < j \le n \}$ as independent $(\nu,b)$-subgamma random variables with $\bbE[ A_{ij} \mid X ] = \rho X_i^T X_j$, where $\rho \in [0,1]$. Then we say that $A$ is distributed according to an $n$-vertex random dot product graph with latent position distribution $F$, $(\nu,b)$-subgamma edges and sparsity factor $\rho$. We write $(A,X) \sim \RDPG( F, n)$, with the subgamma and sparsity parameters made clear from the context.
+
+                \textbf{Theorem:} Suppose that $(A, X)$ are sampled from a random dot product model where $X$ is rank $d$ with probability $1$. Let $\varepsilon$ be a vector of mean zero, i.i.d.~$(\nueps,\beps)$-subgamma random variables, with $(\nueps,\beps)$ not depending on $n$, and let
+                \begin{equation*}
+                    Y = \alpha 1_n + \beta G Y + X \gamma + G X \delta + \varepsilon
+                \end{equation*}
+                for $\alpha, \beta \in \R$ and $\gamma, \delta \in \R^d$, and the conditions of Proposition~\ref{prop:bramoulle2009} hold. Suppose that $X$ has $k \ge 2d$ distinct rows. Then, under suitable technical conditions, the columns of design matrix corresponding to $(\alpha, \beta, \delta_1, \delta_2, \dots, \delta_d)$ are asymptotically colinear. If any two elements of $(\alpha, \beta, \delta_1, \delta_2, \dots, \delta_d)$ are equal to zero, there is no asymptotic colinearity.
+            \end{block}
+
+
+            \begin{block}{Takeaways}
                 \begin{enumerate}
-                    \item Estimated effects are adjusted for possible confounding by age and church attendance.
-                    \item Estimated effects vary with the chosen dimension $d$ of the latent space
-                    \item Over-specifying $d$ is typically okay, but under-specifying $d$ leads to a failure to capture social structure in $\X$
-                    \item Once we capture enough social structure in $\X$, we see a significant indirect social effect that leads adolescent girls to smoke more
+                    \item Peer effects in linear-in-means models
+                    \item We show there is an asymptotic colinearity problem; this is not an identification failure. Rather, it is a signal-to-noise ratio failure, where the signal-to-noise ratio gets worse and worse despite identification.
+                    \item Only show there is a problem in networks with growing minimum degree
+                    \item It is possible for a parameter to be identified, but for there to be no consistent estimator of that parameter
+                    \item This might explain why the linear-in-means model does poorly in simulations
+                    \item One possible solution is to develop models, like latent space models, that account for dependence between nodal covariates and network structure
+                    \item Another possible solution is to avoid bernoulli designs and using graph cluster randomized designs, ego-cluster designs, or multiple experiments
                 \end{enumerate}
-            \end{alertblock}
+            \end{block}
 
 
-            \begin{block}{References \& Contact Info}
+            \begin{block}{Want to learn more? Have a comment? Pre-print \& contact info}
 
                 \nocite{hayes2024c}
                 \printbibliography
