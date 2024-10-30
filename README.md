@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 
 # Estimating peer influence: limitations of linear-in-means model
 
@@ -10,11 +5,11 @@ Linear-in-means models are widely used to investigate peer effects. Identifying 
 
 ## Poster preview
 
-![](poster.pdf)
+![](./poster.pdf)
 
 in between for test
 
-![](poster.png)
+![](./poster.png)
 
 ## Converting from PDF to TIFF or PNG for printing on online display
 
