@@ -281,11 +281,11 @@
                 Three popular estimators all fail to estimate parameters at expected $\sqrt{n}$ rates in simulations, even though half of all possible triangles in the network are open
                 \begin{figure}
                     \centering
-                    \includegraphics[width=0.8\textwidth]{./figures/simulations/biometrika-mse.pdf}
+                    \includegraphics[width=0.9\textwidth]{./figures/simulations/biometrika-mse.pdf}
                 \end{figure}
             \end{block}
 
-            \begin{block}{The problem is that peer effect terms are getting more and more colinear as the number of nodes in the network increases}
+            \begin{block}{The problem is that peer effect terms become more and more colinear as the number of nodes in the network increases}
 
                 \textbf{Intuition:} Imagine vaccination is a coin flip for every node (i.e., a Bernoulli design). As the network grows, the fraction of vaccinated friends $\approx 0.5$ for every single node.
 
@@ -316,7 +316,7 @@
                 \end{equation*}
             \end{block}
 
-            \begin{block}{Asymptotic colinearity leads to inconsistency because the signal-to-noise ratio gets worse and worse with growing sample size}
+            \begin{block}{Asymptotic colinearity leads to inconsistency because the signal-to-noise ratio gets worse with growing sample size}
 
                 \textbf{Theorem:} Under the same conditions as the Lemma, let $(\alphahat, \betahat, \gammahat, \deltahat)$ be the vector of ordinary least squares estimates of $(\alpha, \beta, \gamma, \delta)$. Suppose that the degrees of the network are such that $\| G \|_F^2 = o(n)$.
                 Then if $\beta = 0$,
@@ -359,8 +359,8 @@
 
                 \begin{figure}
                     \centering
-                    \includegraphics[width=\textwidth]{./figures/simulations/biometrika-mse-all.pdf}
-                    \caption{\textcolor{Mahogany}{Red lines} represent estimation error for asymptotically aliased regression coefficients, and \textcolor{gray}{gray lines} represent estimation error for asymptotic un-aliased coefficients.}
+                    \includegraphics[width=0.9\textwidth]{./figures/simulations/biometrika-mse-all.pdf}
+                    \caption{\textcolor{Mahogany}{Red lines} represent estimation error for asymptotically aliased regression coefficients, and \textcolor{gray}{gray lines} represent estimation error for asymptotically un-aliased coefficients.}
                 \end{figure}
 
             \end{block}
