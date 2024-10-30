@@ -5,10 +5,6 @@ Linear-in-means models are widely used to investigate peer effects. Identifying 
 
 ## Poster preview
 
-![](AlexHayes-AFFI2024.pdf)
-
-in between for test
-
 ![](AlexHayes-AFFI2024.png)
 
 ## Converting from PDF to TIFF or PNG for printing on online display
