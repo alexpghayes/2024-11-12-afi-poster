@@ -1,3 +1,5 @@
+% printing information at UW-Madison: https://designlab.wisc.edu/resources/projects/posters/
+
 \PassOptionsToPackage{dvipsnames}{xcolor}
 \documentclass[final]{beamer}
 
@@ -22,36 +24,20 @@
 % https://tex.stackexchange.com/questions/585635/beamer-biblatex-authoryear-causes-problem-with-insertbiblabel
 \setbeamertemplate{bibliography item}{}
 
-
 \usepackage{tikz}
 \usepackage[protrusion=true,expansion=true]{microtype}
 \usepackage{anyfontsize}
 \usepackage{hyperref}
-
-% \usepackage{hayesmacros}
 \usepackage{amsmath}
-\usepackage{amsthm}
 
 \newcommand{\Ni}{\mathcal N(i)}
 \newcommand{\R}{\mathbb{R}}
-
 \newcommand{\alphahat}{\hat{\alpha}}
 \newcommand{\gammahat}{\hat{\gamma}}
 \newcommand{\deltahat}{\hat{\delta}}
 \newcommand{\betahat}{\hat{\beta}}
-
-\DeclareMathOperator*{\supp}{supp}
-
 \newcommand \Omegap [1] {\Omega_P \left(#1\right)}
-
-\newtheorem{proposition}{Proposition}
-
-% Define Dark Red 2 color (RGB: 139,0,0)
-% \definecolor{Mahogany}{RGB}{139,0,0}
-
-% ====================
-% Lengths
-% ====================
+\DeclareMathOperator*{\supp}{supp}
 
 % If you have N columns, choose \sepwidth and \colwidth such that
 % (N+1)*\sepwidth + N*\colwidth = \paperwidth
@@ -62,33 +48,11 @@
 
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
 
-% ====================
-% Title
-% ====================
-
 \title{Estimating peer influence: limitations of linear-in-means models}
-
 \author{Alex Hayes \inst{1} \and Keith Levin \inst{1}}
-
 \institute[shortinst]{\inst{1} Department of Statistics, University of Wisconsin-Madison}
-
-% ====================
-% Footer (optional)
-% ====================
-
-% \footercontent{\hfill \href{https://www.alexpghayes.com}{https://www.alexpghayes.com}}
-% (can be left out to remove footer)
-
-% ====================
-% Logo (optional)
-% ====================
-
-% use this to include logos on the left and/or right side of the header:
 \logoright{\includegraphics[height=7cm]{figures/logos/color-flush-UWlogo-print.pdf}}
-
-% ====================
-% Body
-% ====================
+% \footercontent{\hfill \href{https://www.alexpghayes.com}{https://www.alexpghayes.com}}
 
 \begin{document}
 
