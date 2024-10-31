@@ -13,5 +13,6 @@
 *.blg
 *.out
 *.run.xml
+*.xdv
 
 *.tiff

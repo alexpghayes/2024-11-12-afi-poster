@@ -28,9 +28,21 @@
 \usepackage{anyfontsize}
 \usepackage{hyperref}
 
-\usepackage{hayesmacros}
+% \usepackage{hayesmacros}
 \usepackage{amsmath}
 \usepackage{amsthm}
+
+\newcommand{\Ni}{\mathcal N(i)}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\alphahat}{\hat{\alpha}}
+\newcommand{\gammahat}{\hat{\gamma}}
+\newcommand{\deltahat}{\hat{\delta}}
+\newcommand{\betahat}{\hat{\beta}}
+
+\DeclareMathOperator*{\supp}{supp}
+
+\newcommand \Omegap [1] {\Omega_P \left(#1\right)}
 
 \newtheorem{proposition}{Proposition}
 
@@ -86,12 +98,6 @@
 
         \begin{column}{\colwidth}
 
-            % \begin{alertblock}{Abstract}
-
-            %     Linear-in-means models are widely used to investigate peer effects. Identifying peer effects in these models is challenging, but conditions for identification are well-known. However, even when peer effects are identified, they may not be estimable, due to an asymptotic colinearity issue: as sample size increases, peer effects become more and more linearly dependent.  We show that asymptotic colinearity occurs whenever nodal covariates are independent of the network and the minimum degree of the network is growing. Asymptotic colinearity can cause estimators to be inconsistent or to converge at slower than expected rates. We also demonstrate that dependence between nodal covariates and network structure can alleviate colinearity issues in random dot product graphs. These results suggest that linear-in-means models are less reliable for studying peer influence than previously believed.
-
-            % \end{alertblock}
-
             \begin{block}{Understanding social influence is a fundamental problem in a highly connected society}
 
                 \begin{columns}
@@ -109,12 +115,6 @@
             \end{block}
 
             \begin{block}{The linear-in-means model is a canonical tool to estimate peer influence in network data}
-
-                % Given a network with adjacency matrix $A \in \{0, 1\}^{n \times n}$, and outcomes and treatments for each node, the model assume outcomes depend on treatment and also peer influence from neighboring nodes. Let $\Ni = \{j \in [n]: A_{ij} = 1\}$ be the set of neighbors of node $i$.
-
-                % \textbf{Intuition}: imagine $Y_i \in \{0, 1\}$. Then:
-
-                % Suppose there is a network with $n$ nodes, encoded by a symmetric adjacency matrix $A \in \R^{n \times n}$. In binary networks, $A_{ij} = 1$ if nodes $i$ and $j$ form an edge, and $A_{ij} = 0$ otherwise, though we note that our results do not require that $A$ be binary. Each node $i$ is associated with an outcome $Y_i \in \R$ and a covariate $T_i \in \R$. Letting $\Ni = \left\{ j \in [n]: A_{ij} = 1 \right\}$ denote the neighbors of node $i$ in the network, the treatment and outcome of the neighbors are allowed to influence the outcome of node $i$ as follows:
                 \begin{equation*}
                     \underbrace{Y_i}_\text{sick?} =
                     \alpha +
@@ -132,7 +132,7 @@
                             Outcome         & (sick?)       & $Y_i$    & $\in \{0, 1\}$             \\
                             Treatment       & (vaccinated?) & $T_i$    & $\in \{0, 1\}$             \\
                             Edge $i \sim j$ & (friends?)    & $A_{ij}$ & $\in \{0, 1\}$             \\
-                            Degree          & (num friends) & $d_i$    & $\in \set{0, 1, 2, \dots}$
+                            Degree          & (num friends) & $d_i$    & $\in \{0, 1, 2, \dots\}$
                         \end{tabular}
                     \end{table}
                 \end{minipage}
@@ -242,7 +242,7 @@
             \begin{block}{It's widely believed that colinearity problems can be avoided when certain identifying conditions, such as intransitivity, hold}
 
                 \textbf{Proposition:}
-                Suppose $\mathbb E[\varepsilon \mid T] = 0$ and that $\abs{\beta} < 1$ and $\gamma \beta + \delta \neq 0$. For any fixed $n$, if $I, G$ and $G^2$ are linearly independent (i.e., $a I + b G + c G^2 = 0$ only if $a = b = c = 0$), then $\alpha, \beta, \gamma$ and $\delta$ are identified. If $I, G$ and $G^2$ are linearly dependent and no node is isolated, then $(\alpha, \beta, \gamma, \delta)$ are not identified.
+                Suppose $\mathbb E[\varepsilon \mid T] = 0$ and that $|\beta| < 1$ and $\gamma \beta + \delta \neq 0$. For any fixed $n$, if $I, G$ and $G^2$ are linearly independent (i.e., $a I + b G + c G^2 = 0$ only if $a = b = c = 0$), then $\alpha, \beta, \gamma$ and $\delta$ are identified. If $I, G$ and $G^2$ are linearly dependent and no node is isolated, then $(\alpha, \beta, \gamma, \delta)$ are not identified.
 
                 \textbf{Intuition}: Peer influence is identified when there are \textbf{open triangles} (``intransitivity'') in the network
                 \vspace{8mm}
@@ -262,8 +262,6 @@
                     \end{column}
                     \begin{column}{0.5\textwidth}
                         \centering
-                        % \underline{i.e., 1+ open triangle identifies peer effects} \\
-                        % \vspace{4mm}
                         Closed: \textcolor{Mahogany}{$A \leftrightarrow B \leftrightarrow C \leftrightarrow A$} \\
                         Open: $B \leftrightarrow C \leftrightarrow D \nleftrightarrow B$
                     \end{column}
@@ -302,8 +300,8 @@
                 This also causes the contagion term to be near-colinear with the intercept, since $GY$ is a repeated diffusion of $T$ and $GT$ over the network
                 \begin{align*}
                     Y & = \alpha 1_n + \beta G Y + \gamma T + \delta G T + \varepsilon                            \\
-                      & = \paren*{I - \beta G}^{-1} \paren*{\alpha 1_n + \gamma T + \delta G T + \varepsilon}     \\
-                      & = \sum_{k=0}^\infty \beta^k G^k \paren*{\alpha 1_n + \gamma T + \delta G T + \varepsilon}
+                      & = \left(I - \beta G\right)^{-1} \left(\alpha 1_n + \gamma T + \delta G T + \varepsilon\right)     \\
+                      & = \sum_{k=0}^\infty \beta^k G^k \left(\alpha 1_n + \gamma T + \delta G T + \varepsilon\right)
                 \end{align*}
 
                 \textbf{Lemma:} Suppose that (1) the nodal covariates $T_1, T_2, \dots$ are independent with shared mean $\tau \in \R$, and $T$ is independent of $A$; (2) the nodal covariates are sub-gamma random variables; (3) the regression errors $\varepsilon_1, \varepsilon_2, \dots$ are independent subgamma random variables independent of $T$.
@@ -388,38 +386,5 @@
         \separatorcolumn
     \end{columns}
 \end{frame}
-
-
-
-% The coefficient $\beta$, typically called the ``contagion term'', measures how peer outcomes $Y_j$ influence the outcome $Y_i$ at vertex $i$.
-% This is variously referred to elsewhere in the literature as an ``exogeneous spatial lag'' \, a ``spatial autoregression'' or an ``endogeneous peer effect'' .
-% Similarly, the coefficient $\delta$, typically called the ``interference term'', measures how peer treatments $T_j$ influence $i$'s outcome $Y_i$.
-% Elsewhere in the literature, $\delta$ is variously referred to as a ``contextual peer effect'', an ``exogeneous peer effect'', a ``spatial Durbin term,'' or a ``spatially lagged X'' term.
-
-% The linear-in-means model has been the subject of considerable attention due to challenges identifying the peer effects \citep[see][for a recent review]{bramoulle2020}. \cite{manski1993} famously showed that peer effects are not identified in highly structured social networks. Much of the difficulty comes from the presence of $Y$ on both sides of of equation~\eqref{eq:lim-avg}.
-% Manski's result was subsequently generalized by Proposition~\ref{prop:bramoulle2009} of \cite{bramoulle2009}, which showed that identification of the linear-in-means model is possible, provided that there are some open triangles (``intransivity'') or some variation in group sizes in the network. Since most social networks feature open triangles or variation in group sizes, the linear-in-means model is generally understood to be identified.
-
-
-% In the linear-in-means model, each outcome $Y_i$ is a function of all the other outcomes $Y_1, Y_2, \dots, Y_{i-1}, Y_{i+1}, \dots , Y_n$. This simultaneity \citep[sometimes known as the ``reflection problem'', see][]{manski1993} makes it challenging to understand the data generating process of the linear-in-means model. In this section, we introduce the reduced form of the linear-in-means model, explain the generative process, and describe conditions for identification. Understanding identification in the linear-in-means provides insight into asymptotic colinearity and why it might pose a problem for estimation. In essence, asymptotic colinearity corresponds to identification getting weaker and weaker with increasing sample size.
-
-% We begin by expressing the linear-in-means model in matrix-vector form. Define the degree matrix $D = \diag(d_1, d_2, \dots, d_n)$, where $d_i = \sum_j A_{ij}$. Let $G = D^{-1} A$ be the row-normalized adjacency matrix. Multiplication by $G$ thus maps nodal values to the neighborhood averages of these values, in the sense that $[GY]_i = d_i^{-1} \sum_j A_{ij} Y_j$ (see Fig.~\ref{fig:averaging} for an illustration). Incorporating this notation, we have
-% \begin{equation} \label{eq:lim-mv}
-%     Y = \alpha 1_n + \beta G Y + T \gamma + G T \delta + \varepsilon,
-% \end{equation}
-% where $GY \in \R^n$ encodes the vector of neighborhood averages of $Y$ and $GT \in \R^n$ encodes the neighborhood averages of $T$. Thus, the design matrix of the linear-in-means model is
-% \begin{equation} \label{eq:def:W}
-%     W_n = \begin{bmatrix} 1_n & GY & T & GT \end{bmatrix}.
-% \end{equation}
-
-% We assume, as is typical, that the errors $\varepsilon$ are mean-zero and independent of the network $A$ and nodal covariates $T$. We don't make parametric assumptions on the noise terms $\varepsilon$. Later on, we will consider multiple nodal covariates, allowing $T_i \in \R^p$ to be vector-valued. Thus, $\gamma, \delta \in \R^p$ are allowed to be vector-valued.
-
-% To work with equation~\eqref{eq:lim-mv}, we solve for $Y$ and consider the reduced form specification of the model, which is possible provided that $I - \beta G$ is invertible (i.e., when $\abs{\beta} < 1$). Employing the Neumann expansion $\paren*{I - \beta G}^{-1} = \sum_{k=0}^\infty \beta^k G^k$, we can write
-% \begin{equation} \label{eq:lim-red}
-%     Y = \paren*{I - \beta G}^{-1} \paren*{1_n \alpha + T \gamma + G T \delta + \varepsilon}      \\
-%     = \sum_{k=0}^\infty \beta^k G^k \paren*{1_n \alpha + T \gamma + G T \delta + \varepsilon}.
-% \end{equation}
-% This reduced form describes how outcomes $Y$ can be generated given a network $A$, nodal covariates $T$ and errors $\varepsilon$. The expression further suggests that $Y$ can be interpreted as the equilibrium state reached after repeated neighborhood averaging on the network. That is, one  way to sample an outcome vector $Y$ is to construct an initial outcome vector $Y^{(0)} = \alpha 1_n + \gamma T + \delta G T + \varepsilon$, and then to repeatedly diffuse this outcome over the network according to $G$, weighting by $\beta$ each time. To be very concrete: once $Y^{(0)}$ has been sampled, compute the scaled neighborhood average value $\beta G (\alpha 1_n + \gamma T + \delta G T + \varepsilon)$ and add it to $Y^{(0)}$ to construct a new outcome vector $Y^{(1)} = \beta G Y^{(0)} + Y^{(0)}$. Then compute the average neighborhood value of $Y^{(2)} = \beta G Y^{(1)} + Y^{(1)}$, $Y^{(3)}$, and so on. Repeating this process infinitely many times produces the equilibrium value $Y$ in equation~\eqref{eq:lim-red}, which is guaranteed to be finite and unique by the fact that $\abs*{\beta} < 1$.
-
-% Interpreting the regression coefficients $(\alpha, \beta, \gamma, \delta)$ in light of the repeated diffusion process for $Y$ can be challenging, as the typical interpretation of linear regression coefficients no longer applies. \cite{vazquez-bare2023} and \citet[][Chapter 2]{lesage2009} discuss these considerations in detail. Similarly, estimating the regression coefficients requires specialized techniques, as the contagion and interference terms introduce dependence between entries of the outcome vector $Y$. Some approaches to estimation are given by \cite{ord1975, kelejian2001,lee2002,lee2003,lee2004,kelejian2007,lee2010, su2012, drukker2013, lin2010a} and surveyed in \cite{bivand2021}.
 
 \end{document}
