@@ -64,18 +64,35 @@
 
             \begin{block}{Understanding social influence is a fundamental problem in a highly connected society}
 
-                \begin{columns}
-                    \column{0.3\textwidth}
-                    \centering
-                    \includegraphics[width=0.9\textwidth]{./figures/assortative.png}
-                    \column{0.7\textwidth}
-                    \textbf{Contagion}: if my friends get sick, I am more likely to get sick \\
-                    \vspace{8mm}
-                    \textbf{Direct effect}: if I get vaccinated, I am less likely to get sick \\
-                    \vspace{8mm}
-                    \textbf{Interference}: if my friends get vaccinated, I am less likely to get sick \\
-                \end{columns}
+                \vspace{4mm}
 
+                \begin{minipage}{.25\textwidth}
+                    \centering
+                    \begin{tikzpicture}
+                        \node[shape=circle,fill=Mahogany] (A) at (0,1) {};
+                        \node[shape=circle,fill=gray,label=below left:{\includegraphics[scale=0.4]{./figures/bacteria.png}}] (B) at (1,-1) {};
+                        \node[shape=circle,fill=Mahogany] (C) at (1.5,2.5) {};
+                        \node[shape=circle,fill=Mahogany] (D) at (2.75,0.5) {};
+                        \node[shape=circle,fill=gray,label=above right:{\includegraphics[scale=0.4]{./figures/bacteria.png}}] (E) at (4.3,2.4) {};
+                        \node[shape=circle,fill=Mahogany,label=below:{\includegraphics[scale=0.4]{./figures/bacteria.png}}] (F) at (3.4,-1.4) {};
+                        \node[shape=circle,fill=gray,label=right:{\includegraphics[scale=0.4]{./figures/bacteria.png}}] (G) at (4.7,0.1) {};
+
+                        \draw (A) -- (B);
+                        \draw (A) -- (C);
+                        \draw (B) -- (C);
+                        \draw (B) -- (D) -- (F);
+                        \draw (C) -- (D) -- (E);
+                        \draw (B) -- (F) -- (G) -- (E) -- (C);
+                    \end{tikzpicture}
+                \end{minipage}
+                \begin{minipage}{.75\textwidth}
+                    \vspace{7mm}
+                    \textbf{Direct effect}: if I get \textcolor{Mahogany}{vaccinated}, I am less likely to get sick \includegraphics[scale=0.4]{./figures/bacteria.png}
+                    \vspace{6mm} \\
+                    \textbf{Contagion}: if my friends get sick \includegraphics[scale=0.4]{./figures/bacteria.png}, I am more likely to get sick \includegraphics[scale=0.4]{./figures/bacteria.png}
+                    \vspace{6mm} \\
+                    \textbf{Interference}: if my friends get \textcolor{Mahogany}{vaccinated}, I am less likely to get sick \includegraphics[scale=0.4]{./figures/bacteria.png}
+                \end{minipage}
             \end{block}
 
             \begin{block}{The linear-in-means model is a canonical tool to estimate peer influence in network data}
@@ -84,7 +101,7 @@
                     \alpha +
                     \beta \underbrace{\frac{1}{d_i}\sum_{j \in \Ni} Y_j}_{\substack{\text{fraction} \\ \text{sick} \\ \text{friends}}} +
                     \gamma \, T_i +
-                    \delta \underbrace{\frac{1}{d_i}\sum_{j \in \Ni} T_j}_{\substack{\text{fraction} \\ \text{vaccinated} \\ \text{friends}}} +
+                    \delta \underbrace{\frac{1}{d_i}\sum_{j \in \Ni} T_j}_{\substack{\text{fraction} \\ \text{vaccinated} \\ \text{friends}}} + \,
                     \varepsilon_i
                 \end{equation*}
 
@@ -93,9 +110,9 @@
                     \vspace{3mm}
                     \begin{table}[]
                         \begin{tabular}{llcl}
-                            Outcome         & (sick?)       & $Y_i$    & $\in \{0, 1\}$             \\
-                            Treatment       & (vaccinated?) & $T_i$    & $\in \{0, 1\}$             \\
-                            Edge $i \sim j$ & (friends?)    & $A_{ij}$ & $\in \{0, 1\}$             \\
+                            Outcome         & (sick?)       & $Y_i$    & $\in \{0, 1\}$           \\
+                            Treatment       & (vaccinated?) & $T_i$    & $\in \{0, 1\}$           \\
+                            Edge $i \sim j$ & (friends?)    & $A_{ij}$ & $\in \{0, 1\}$           \\
                             Degree          & (num friends) & $d_i$    & $\in \{0, 1, 2, \dots\}$
                         \end{tabular}
                     \end{table}
@@ -128,7 +145,7 @@
                         \centering
                         \begin{tikzpicture}
                             \node[shape=circle,fill=Mahogany,label=above left:{$T_1 = 1$}] (A) at (0,1) {};
-                            \node[shape=circle,fill=Mahogany,label=below left:{$T_2 = 0$}] (B) at (1,0) {};
+                            \node[shape=circle,fill=gray,label=below left:{$T_2 = 0$}] (B) at (1,0) {};
                             \node[shape=circle,fill=Mahogany,label=above right:{$T_3 = 1$}] (C) at (1.5,1.5) {};
                             \node[shape=circle,fill=Mahogany,label=above right:{$T_4 = 1$}] (D) at (2.75,0.5) {};
 
@@ -149,7 +166,7 @@
                         \centering
                         \begin{tikzpicture}
                             \node[shape=circle,fill=Mahogany,label=above left:{$[GT]_1 = 3/4$}] (A) at (0,1) {};
-                            \node[shape=circle,fill=Mahogany,label=below left:{$[GT]_2 = 3/4$}] (B) at (1,0) {};
+                            \node[shape=circle,fill=gray,label=below left:{$[GT]_2 = 3/4$}] (B) at (1,0) {};
                             \node[shape=circle,fill=Mahogany,label=above right:{$[GT]_3 = 3/4$}] (C) at (1.5,1.5) {};
                             \node[shape=circle,fill=Mahogany,label=above right:{$[GT]_4 = 3/4$}] (D) at (2.75,0.5) {};
 
@@ -198,23 +215,20 @@
                     \end{bmatrix}
                 \end{equation*}
 
-                Can't distinguish base rate $\textcolor{Mahogany}{\alpha}$ from interference $\textcolor{Mahogany}{\delta}$ due to colinearity
+                Can't distinguish base rate $\textcolor{Mahogany}{\alpha}$ from interference $\textcolor{Mahogany}{\delta}$ due to colinearity. The measurement of the base rate and the fraction of vaccinated friends effects are rescaled versions of one another--it's impossible to differentiate between them.
             \end{block}
-
-
-
             \begin{block}{It's widely believed that colinearity problems can be avoided when certain identifying conditions, such as intransitivity, hold}
 
                 \textbf{Proposition:}
                 Suppose $\mathbb E[\varepsilon \mid T] = 0$ and that $|\beta| < 1$ and $\gamma \beta + \delta \neq 0$. For any fixed $n$, if $I, G$ and $G^2$ are linearly independent (i.e., $a I + b G + c G^2 = 0$ only if $a = b = c = 0$), then $\alpha, \beta, \gamma$ and $\delta$ are identified. If $I, G$ and $G^2$ are linearly dependent and no node is isolated, then $(\alpha, \beta, \gamma, \delta)$ are not identified.
 
-                \textbf{Intuition}: Peer influence is identified when there are \textbf{open triangles} (``intransitivity'') in the network
+                \textbf{Intuition}: Peer influence is identified when there are \textcolor{Mahogany}{open triangles} (``intransitivity'') in the network
                 \vspace{8mm}
                 \begin{columns}
                     \begin{column}{0.5\textwidth}
                         \centering
                         \begin{tikzpicture}
-                            \node[shape=circle,fill=Mahogany,label=above left:A] (A) at (0,1) {};
+                            \node[shape=circle,fill=gray,label=above left:A] (A) at (0,1) {};
                             \node[shape=circle,fill=Mahogany,label=below left:B] (B) at (1,0) {};
                             \node[shape=circle,fill=Mahogany,label=above right:C] (C) at (1.5,1.5) {};
                             \node[shape=circle,fill=Mahogany,label=above right:D] (D) at (2.75,0.5) {};
@@ -226,8 +240,8 @@
                     \end{column}
                     \begin{column}{0.5\textwidth}
                         \centering
-                        Closed: \textcolor{Mahogany}{$A \leftrightarrow B \leftrightarrow C \leftrightarrow A$} \\
-                        Open: $B \leftrightarrow C \leftrightarrow D \nleftrightarrow B$
+                        Open: \textcolor{Mahogany}{$B \leftrightarrow C \leftrightarrow D \nleftrightarrow B$} \\
+                        Closed: $A \leftrightarrow B \leftrightarrow C \leftrightarrow A$
                     \end{column}
                 \end{columns}
             \end{block}
@@ -263,8 +277,8 @@
                 \end{equation}
                 This also causes the contagion term to be near-colinear with the intercept, since $GY$ is a repeated diffusion of $T$ and $GT$ over the network
                 \begin{align*}
-                    Y & = \alpha 1_n + \beta G Y + \gamma T + \delta G T + \varepsilon                            \\
-                      & = \left(I - \beta G\right)^{-1} \left(\alpha 1_n + \gamma T + \delta G T + \varepsilon\right)     \\
+                    Y & = \alpha 1_n + \beta G Y + \gamma T + \delta G T + \varepsilon                                \\
+                      & = \left(I - \beta G\right)^{-1} \left(\alpha 1_n + \gamma T + \delta G T + \varepsilon\right) \\
                       & = \sum_{k=0}^\infty \beta^k G^k \left(\alpha 1_n + \gamma T + \delta G T + \varepsilon\right)
                 \end{align*}
 
@@ -331,22 +345,31 @@
                 \begin{enumerate}
                     \item It can be impossible to estimate peer effects using linear-in-means models, even when all parameters in the model are identified. This is primarily an issue for Bernoulli designs in dense networks, or under models with growing minimum degree.
                     \item In observational data from random dot product models (like stochastic blockmodels), it may be possible to avoid colinearity issues by including latent network structure in the regression
-                    \item In controlled experiments, use network-specific designs, like graph-cluster or ego-cluster randomization, to avoid the colinearity issues of Bernoulli designs
+                    \item In controlled experiments, use network-specific designs like graph-cluster or ego-cluster randomization to avoid colinearity issues
                 \end{enumerate}
             \end{block}
 
             \begin{block}{Want to learn more? Have a comment? Pre-print \& contact info}
                 \nocite{hayes2024c}
                 \printbibliography
-                \begin{center}
-                    \url{alex.hayes@wisc.edu} \\
-                    \url{https://www.alexpghayes.com}
-                \end{center}
+
+
+                \begin{columns}
+                    \begin{column}{0.7\textwidth}
+                        \begin{center}
+                            \url{alex.hayes@wisc.edu} \\
+                            \url{https://www.alexpghayes.com}
+                        \end{center}
+                    \end{column}
+                    \begin{column}{0.3\textwidth}
+                        \begin{figure}
+                            \centering
+                            \includegraphics[width=0.45\textwidth]{./figures/arxiv-qr.png}
+                        \end{figure}
+                    \end{column}
+                \end{columns}
             \end{block}
-
-
         \end{column}
-
         \separatorcolumn
     \end{columns}
 \end{frame}
