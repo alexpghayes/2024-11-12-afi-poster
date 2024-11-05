@@ -9,8 +9,17 @@
 % set poster dimensions below (in cm)
 % AFI / the posterboards at the Discovery Building are 46"x46".
 % 46" wide x 36" high (121.92 x 91.44 cm)
-% A0 for ASA WI Chapter, which is slightly smaller 84.1 x 118.9
-\usepackage[size=custom,width=118.9,height=84.1, scale=1]{beamerposter}
+% A0 for ASA WI Chapter, which is slightly smaller 84.1 x 118.9 (46.8 wide by 33.1 tall)
+% \usepackage[orientation=landscape, size=a0, scale=1]{beamerposter}
+
+% A0 margins + 0.5 cm bleed in each direction?
+\usepackage[orientation=landscape,width=119.9cm,height=85.1cm, scale=1]{beamerposter}
+
+% https://mirror.math.princeton.edu/pub/CTAN/macros/latex/contrib/crop/crop.pdf
+% \usepackage[width=119.9cm,height=85.1cm,noaxes,frame,lualatex,landscape,center]{crop}
+
+% \usepackage{geometry}
+
 \usetheme{gemini}
 \usecolortheme{mit}
 \usepackage{graphicx}
@@ -355,7 +364,7 @@
 
 
                 \begin{columns}
-                    \begin{column}{0.7\textwidth}
+                    \begin{column}{0.4\textwidth}
                         \begin{center}
                             \url{alex.hayes@wisc.edu} \\
                             \url{https://www.alexpghayes.com}
